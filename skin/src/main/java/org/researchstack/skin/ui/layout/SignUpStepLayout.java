@@ -17,6 +17,7 @@ import org.researchstack.backbone.ui.step.layout.StepLayout;
 import org.researchstack.backbone.ui.views.SubmitBar;
 import org.researchstack.backbone.utils.ObservableUtils;
 import org.researchstack.backbone.utils.TextUtils;
+import org.researchstack.skin.AppPrefs;
 import org.researchstack.skin.DataProvider;
 import org.researchstack.skin.R;
 import org.researchstack.skin.task.SignUpTask;
@@ -105,6 +106,8 @@ public class SignUpStepLayout extends RelativeLayout implements StepLayout
         {
             final String email = this.email.getText().toString();
             final String password = this.password.getText().toString();
+
+            AppPrefs.getInstance(getContext()).saveCredentials(email, password);
 
             progress.animate()
                     .alpha(1)

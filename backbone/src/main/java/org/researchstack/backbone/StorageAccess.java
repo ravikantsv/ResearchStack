@@ -30,7 +30,7 @@ import java.util.List;
  * <p>
  * {@link org.researchstack.backbone.ui.PinCodeActivity} handles almost all of this for you,
  * including presenting the pin code screen to the user. PinCodeActivity should be used, extended,
- * or it's fuctionality copied to your application's own base Activity. Make sure to delay any data
+ * or its functionality copied to your application's own base Activity. Make sure to delay any data
  * access until {@link PinCodeActivity#onDataReady()} has been called.
  */
 public class StorageAccess

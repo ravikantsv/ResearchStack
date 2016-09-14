@@ -2,6 +2,7 @@ package org.researchstack.skin;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Pair;
 
 import org.researchstack.skin.ui.fragment.SettingsFragment;
 
@@ -12,6 +13,8 @@ public class AppPrefs
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     private static final String KEY_ONBOARDING_COMPLETE = "settings_onboarding_complete";
     private static final String KEY_ONBOARDING_SKIPPED  = "settings_onboarding_skipped";
+    private static final String PREF_KEY_EMAIL = "email";
+    private static final String PREF_KEY_PASSWORD = "password";
     private static AppPrefs instance;
 
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -84,5 +87,26 @@ public class AppPrefs
     public boolean isTaskReminderEnabled()
     {
         return prefs.getBoolean(SettingsFragment.KEY_REMINDERS, false);
+    }
+
+
+    public void saveCredentials(String email, String password)
+    {
+        prefs
+                .edit()
+                .putString(PREF_KEY_EMAIL, email)
+                .putString(PREF_KEY_PASSWORD, password)
+                .apply();
+    }
+
+    public Pair<String, String> getCredentials()
+    {
+        String email = prefs.getString(PREF_KEY_EMAIL, "");
+        String password = prefs.getString(PREF_KEY_PASSWORD, "");
+        if (email.isEmpty() || password.isEmpty()) {
+            return null;
+        } else {
+            return new Pair<>(email, password);
+        }
     }
 }
