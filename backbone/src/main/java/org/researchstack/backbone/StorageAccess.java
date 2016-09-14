@@ -2,9 +2,11 @@ package org.researchstack.backbone;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.MainThread;
+import android.util.Pair;
 
 import org.researchstack.backbone.storage.database.AppDatabase;
 import org.researchstack.backbone.storage.file.EncryptionProvider;
@@ -30,7 +32,7 @@ import java.util.List;
  * <p>
  * {@link org.researchstack.backbone.ui.PinCodeActivity} handles almost all of this for you,
  * including presenting the pin code screen to the user. PinCodeActivity should be used, extended,
- * or it's fuctionality copied to your application's own base Activity. Make sure to delay any data
+ * or its functionality copied to your application's own base Activity. Make sure to delay any data
  * access until {@link PinCodeActivity#onDataReady()} has been called.
  */
 public class StorageAccess
@@ -46,6 +48,10 @@ public class StorageAccess
     //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
     private static StorageAccess instance = new StorageAccess();
+
+    private static final String PREFS = "prefs";
+    private static final String PREF_KEY_EMAIL = "email";
+    private static final String PREF_KEY_PASSWORD = "password";
 
     //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     // Fields
@@ -292,6 +298,32 @@ public class StorageAccess
     {
         encryptionProvider.startWithPassphrase(context, pin);
         injectEncrypter();
+    }
+
+    private SharedPreferences getSharedPrefs(Context context)
+    {
+        return context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+    }
+
+    public void saveCredentials(Context context, String email, String password)
+    {
+        getSharedPrefs(context)
+            .edit()
+            .putString(PREF_KEY_EMAIL, email)
+            .putString(PREF_KEY_PASSWORD, password)
+            .apply();
+    }
+
+    public Pair<String, String> getCredentials(Context context)
+    {
+        SharedPreferences prefs = getSharedPrefs(context);
+        String email = prefs.getString(PREF_KEY_EMAIL, "");
+        String password = prefs.getString(PREF_KEY_PASSWORD, "");
+        if (email.isEmpty() || password.isEmpty()) {
+            return null;
+        } else {
+            return new Pair<>(email, password);
+        }
     }
 
     /**

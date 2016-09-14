@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 
+import org.researchstack.backbone.StorageAccess;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.Step;
 import org.researchstack.backbone.ui.callbacks.StepCallbacks;
@@ -124,27 +125,26 @@ public class SignInStepLayout extends RelativeLayout implements StepLayout
         {
             final String username = this.email.getText().toString();
             final String password = this.password.getText().toString();
+            StorageAccess.getInstance().saveCredentials(getContext(), username, password);
 
             progress.animate().alpha(1).withStartAction(() -> {
                 progress.setVisibility(View.VISIBLE);
                 progress.setAlpha(0);
-            }).withEndAction(() -> {
-                DataProvider.getInstance()
-                        .signIn(getContext(), username, password)
-                        .compose(ObservableUtils.applyDefault())
-                        .subscribe(dataResponse -> {
-                            if(dataResponse.isSuccess())
-                            {
-                                callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, step, result);
-                            }
-                            else
-                            {
-                                handleError(dataResponse.getMessage(), username, password);
-                            }
-                        }, throwable -> {
-                            handleError(throwable.getMessage(), username, password);
-                        });
-            });
+            }).withEndAction(() -> DataProvider.getInstance()
+                    .signIn(getContext(), username, password)
+                    .compose(ObservableUtils.applyDefault())
+                    .subscribe(dataResponse -> {
+                        if(dataResponse.isSuccess())
+                        {
+                            callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, step, result);
+                        }
+                        else
+                        {
+                            handleError(dataResponse.getMessage(), username, password);
+                        }
+                    }, throwable -> {
+                        handleError(throwable.getMessage(), username, password);
+                    }));
         }
     }
 
