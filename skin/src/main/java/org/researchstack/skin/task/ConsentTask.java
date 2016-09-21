@@ -44,7 +44,8 @@ public class ConsentTask extends OrderedTask
     public static final String ID_SHARING                       = "ID_SHARING";
     public static final String ID_CONSENT_DOC                   = "consent_review_doc";
     public static final String ID_FORM                          = "ID_FORM";
-    public static final String ID_FORM_NAME                     = "ID_FORM_NAME";
+    public static final String ID_FORM_FIRSTNAME                = "ID_FORM_FIRSTNAME";
+    public static final String ID_FORM_LASTNAME                 = "ID_FORM_LASTNAME";
     public static final String ID_FORM_DOB                      = "ID_FORM_DOB";
     public static final String ID_FORM_BIRTHDATE                = "ID_FORM_BIRTHDATE";
     public static final String ID_SIGNATURE                     = "ID_SIGNATURE";
@@ -237,8 +238,11 @@ public class ConsentTask extends OrderedTask
 
                 String placeholder = ctx.getResources()
                         .getString(R.string.rsb_consent_name_placeholder);
-                String nameText = ctx.getResources().getString(R.string.rsb_consent_name_full);
-                formSteps.add(new QuestionStep(ID_FORM_NAME, nameText, format));
+                String firstNameText = ctx.getResources().getString(R.string.rsb_consent_name_first);
+                formSteps.add(new QuestionStep(ID_FORM_FIRSTNAME, firstNameText, format));
+
+                String lastNameText = ctx.getResources().getString(R.string.rsb_consent_name_last);
+                formSteps.add(new QuestionStep(ID_FORM_LASTNAME, lastNameText, format));
             }
 
             if(requiresBirthDate)

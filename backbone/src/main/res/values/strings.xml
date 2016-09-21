@@ -74,7 +74,8 @@
 
     <!-- Consent form step -->
     <string name="rsb_consent_form_title">Consent</string>
-    <string name="rsb_consent_name_full">Full Name</string>
+    <string name="rsb_consent_name_first">First Name</string>
+    <string name="rsb_consent_name_last">Last Name</string>
     <string name="rsb_consent_dob_full">Date of Birth</string>
     <string name="rsb_consent_name_placeholder">Required</string>
 

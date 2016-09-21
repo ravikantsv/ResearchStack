@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 /*
   Created by bradleymcdermott on 10/22/15.
+
+  Updated by petriet on 09/20/16 to reflect new bridge API
+
  */
 public class User implements Serializable
 {
-    private String name;
+    private String firstName;
+
+    private String lastName;
 
     private String email;
 
@@ -19,12 +24,27 @@ public class User implements Serializable
 
     public String getName()
     {
-        return name;
+        return firstName + " " + lastName;
     }
 
-    public void setName(String name)
+    public void setFirstName(String firstName)
     {
-        this.name = name;
+        this.firstName = firstName;
+    }
+
+    public String getFirstName()
+    {
+        return this.firstName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getLastName()
+    {
+        return this.lastName;
     }
 
     public String getEmail()
