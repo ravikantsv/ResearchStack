@@ -45,6 +45,11 @@ public class PinCodeActivity extends AppCompatActivity implements StorageAccessL
         super.onPause();
         LogExt.i(getClass(), "logAccessTime()");
         StorageAccess.getInstance().logAccessTime();
+        storageAccessUnregister();
+        if(pinCodeLayout != null)
+        {
+            getWindowManager().removeView(pinCodeLayout);
+        }
     }
 
     @Override
@@ -53,17 +58,6 @@ public class PinCodeActivity extends AppCompatActivity implements StorageAccessL
         super.onResume();
 
         requestStorageAccess();
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        storageAccessUnregister();
-        if(pinCodeLayout != null)
-        {
-            getWindowManager().removeView(pinCodeLayout);
-        }
     }
 
     protected void requestStorageAccess()
