@@ -127,12 +127,12 @@ public class ConsentTask extends OrderedTask
         //        sharingStep.setLocalizedLearnMoreHTMLContent(localizedLearnMoreHTMLContent);
 
         String shareWidely = r.getString(R.string.rsb_consent_share_widely, investigatorLongDesc);
-        Choice<String> shareWidelyChoice = new Choice<>(shareWidely, "sponsors_and_partners", null);
+        Choice<String> shareWidelyChoice = new Choice<>(shareWidely, "all_qualified_researchers", null);
 
         String shareRestricted = r.getString(R.string.rsb_consent_share_only,
                 investigatorShortDesc);
         Choice<String> shareRestrictedChoice = new Choice<>(shareRestricted,
-                "all_qualified_researchers",
+                "sponsors_and_partners",
                 null);
 
         sharingStep.setAnswerFormat(new ChoiceAnswerFormat(AnswerFormat.ChoiceAnswerStyle.SingleChoice,
