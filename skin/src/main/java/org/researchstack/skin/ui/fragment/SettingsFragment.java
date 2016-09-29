@@ -419,14 +419,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
 
     public String formatSharingOption(String option)
     {
-        if(option.equals("sponsors_and_partners"))
+        if(option.equals("all_qualified_researchers"))
         {
             String investigatorLongDesc = data.getDocumentProperties()
                     .getInvestigatorLongDescription();
 
             return getString(R.string.rsb_consent_share_widely, investigatorLongDesc);
         }
-        else if(option.equals("all_qualified_researchers"))
+        else if(option.equals("sponsors_and_partners"))
         {
             String investigatorShortDesc = data.getDocumentProperties()
                     .getInvestigatorShortDescription();
