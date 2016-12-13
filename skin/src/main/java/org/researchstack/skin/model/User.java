@@ -24,7 +24,7 @@ public class User implements Serializable
 
     public String getName()
     {
-        return firstName + " " + lastName;
+        return firstName + "+" + lastName;
     }
 
     public void setFirstName(String firstName)
