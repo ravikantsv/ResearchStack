@@ -91,7 +91,7 @@ public class ConsentTask extends OrderedTask
 
         initVisualSteps(context, doc, steps);
 
-        initConsentSharingStep(r, data, steps);
+//        initConsentSharingStep(r, data, steps);
 
         initQuizSteps(context, quiz, steps);
 
@@ -100,52 +100,52 @@ public class ConsentTask extends OrderedTask
         return new ConsentTask(taskId, steps);
     }
 
-    private static void initConsentSharingStep(Resources r, ConsentSectionModel data, List<Step> steps)
-    {
-        String investigatorShortDesc = data.getDocumentProperties()
-                .getInvestigatorShortDescription();
-        if(TextUtils.isEmpty(investigatorShortDesc))
-        {
-            throw new IllegalArgumentException(INVALID_ARGUMENT_CANNOT_BE_NULL);
-        }
-
-        String investigatorLongDesc = data.getDocumentProperties().getInvestigatorLongDescription();
-        if(TextUtils.isEmpty(investigatorLongDesc))
-        {
-            throw new IllegalArgumentException(INVALID_ARGUMENT_CANNOT_BE_NULL);
-        }
-
-        String localizedLearnMoreHTMLContent = data.getDocumentProperties().getHtmlContent();
-        if(TextUtils.isEmpty(localizedLearnMoreHTMLContent))
-        {
-            throw new IllegalArgumentException(INVALID_ARGUMENT_CANNOT_BE_NULL);
-        }
-
-        ConsentSharingStep sharingStep = new ConsentSharingStep(ID_SHARING);
-        sharingStep.setOptional(false);
-        sharingStep.setStepTitle(R.string.rsb_consent);
-        //        sharingStep.setLocalizedLearnMoreHTMLContent(localizedLearnMoreHTMLContent);
-
-        String shareWidely = r.getString(R.string.rsb_consent_share_widely, investigatorLongDesc);
-        Choice<String> shareWidelyChoice = new Choice<>(shareWidely, "all_qualified_researchers", null);
-
-        String shareRestricted = r.getString(R.string.rsb_consent_share_only,
-                investigatorShortDesc);
-        Choice<String> shareRestrictedChoice = new Choice<>(shareRestricted,
-                "sponsors_and_partners",
-                null);
-
-        sharingStep.setAnswerFormat(new ChoiceAnswerFormat(AnswerFormat.ChoiceAnswerStyle.SingleChoice,
-                shareWidelyChoice,
-                shareRestrictedChoice));
-
-        sharingStep.setTitle(r.getString(R.string.rsb_consent_share_title));
-        sharingStep.setText(r.getString(R.string.rsb_consent_share_description,
-                investigatorLongDesc,
-                localizedLearnMoreHTMLContent));
-
-        steps.add(sharingStep);
-    }
+//    private static void initConsentSharingStep(Resources r, ConsentSectionModel data, List<Step> steps)
+//    {
+//        String investigatorShortDesc = data.getDocumentProperties()
+//                .getInvestigatorShortDescription();
+//        if(TextUtils.isEmpty(investigatorShortDesc))
+//        {
+//            throw new IllegalArgumentException(INVALID_ARGUMENT_CANNOT_BE_NULL);
+//        }
+//
+//        String investigatorLongDesc = data.getDocumentProperties().getInvestigatorLongDescription();
+//        if(TextUtils.isEmpty(investigatorLongDesc))
+//        {
+//            throw new IllegalArgumentException(INVALID_ARGUMENT_CANNOT_BE_NULL);
+//        }
+//
+//        String localizedLearnMoreHTMLContent = data.getDocumentProperties().getHtmlContent();
+//        if(TextUtils.isEmpty(localizedLearnMoreHTMLContent))
+//        {
+//            throw new IllegalArgumentException(INVALID_ARGUMENT_CANNOT_BE_NULL);
+//        }
+//
+//        ConsentSharingStep sharingStep = new ConsentSharingStep(ID_SHARING);
+//        sharingStep.setOptional(false);
+//        sharingStep.setStepTitle(R.string.rsb_consent);
+////        sharingStep.setLocalizedLearnMoreHTMLContent(localizedLearnMoreHTMLContent);
+//
+//        String shareWidely = r.getString(R.string.rsb_consent_share_widely, investigatorLongDesc);
+//        Choice<String> shareWidelyChoice = new Choice<>(shareWidely, "all_qualified_researchers", null);
+//
+//        String shareRestricted = r.getString(R.string.rsb_consent_share_only,
+//                investigatorShortDesc);
+//        Choice<String> shareRestrictedChoice = new Choice<>(shareRestricted,
+//                "sponsors_and_partners",
+//                null);
+//
+//        sharingStep.setAnswerFormat(new ChoiceAnswerFormat(AnswerFormat.ChoiceAnswerStyle.SingleChoice,
+//                shareWidelyChoice,
+//                shareRestrictedChoice));
+//
+//        sharingStep.setTitle(r.getString(R.string.rsb_consent_share_title));
+//        sharingStep.setText(r.getString(R.string.rsb_consent_share_description,
+//                investigatorLongDesc,
+//                localizedLearnMoreHTMLContent));
+//
+//        steps.add(sharingStep);
+//    }
 
     private static void initVisualSteps(Context ctx, ConsentDocument doc, List<Step> steps)
     {

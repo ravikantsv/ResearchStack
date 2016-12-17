@@ -267,8 +267,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                     String investigatorLongDesc = data.getDocumentProperties()
                             .getInvestigatorLongDescription();
 
-                    String localizedLearnMoreHTMLContent = data.getDocumentProperties()
-                            .getHtmlContent();
+//                    String localizedLearnMoreHTMLContent = data.getDocumentProperties()
+//                            .getHtmlContent();
 
                     ConsentSharingStep sharingStep = new ConsentSharingStep(ConsentTask.ID_SHARING);
                     sharingStep.setOptional(false);
@@ -291,9 +291,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                             shareRestrictedChoice));
 
                     sharingStep.setTitle(getString(R.string.rsb_consent_share_title));
-                    sharingStep.setText(getString(R.string.rsb_consent_share_description,
-                            investigatorLongDesc,
-                            localizedLearnMoreHTMLContent));
+//                    sharingStep.setText(getString(R.string.rsb_consent_share_description,
+//                            investigatorLongDesc,
+//                            localizedLearnMoreHTMLContent));
 
                     Task task = new OrderedTask("SharingStepTask", sharingStep);
                     Intent intent = ViewTaskActivity.newIntent(getContext(), task);
