@@ -297,7 +297,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
 
                     Task task = new OrderedTask("SharingStepTask", sharingStep);
                     Intent intent = ViewTaskActivity.newIntent(getContext(), task);
-                    startActivityForResult(intent, REQUEST_CODE_SHARING_OPTIONS);
+//                    startActivityForResult(intent, REQUEST_CODE_SHARING_OPTIONS);
                     return true;
 
                 case KEY_LEAVE_STUDY:
