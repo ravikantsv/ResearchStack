@@ -198,18 +198,18 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                         }
                     });
 
-            // Load Consent Data and set sharing scope
-            Observable.defer(() -> Observable.just(ResourceManager.getInstance()
-                    .getConsentSections()
-                    .create(getActivity()))).flatMap((consentData) -> {
-                this.data = (ConsentSectionModel) consentData;
-
-                // Load and set sharing scope
-                return Observable.just(DataProvider.getInstance()
-                        .getUserSharingScope(getContext()));
-            }).compose(ObservableUtils.applyDefault()).subscribe(scope -> {
-                sharingScope.setSummary(formatSharingOption(scope));
-            });
+//            // Load Consent Data and set sharing scope
+//            Observable.defer(() -> Observable.just(ResourceManager.getInstance()
+//                    .getConsentSections()
+//                    .create(getActivity()))).flatMap((consentData) -> {
+//                this.data = (ConsentSectionModel) consentData;
+//
+//                // Load and set sharing scope
+//                return Observable.just(DataProvider.getInstance()
+//                        .getUserSharingScope(getContext()));
+//            }).compose(ObservableUtils.applyDefault()).subscribe(scope -> {
+//                sharingScope.setSummary(formatSharingOption(scope));
+//            });
         }
 
         isInitializedForConsent = true;
@@ -362,15 +362,15 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     {
         if(requestCode == REQUEST_CODE_SHARING_OPTIONS && resultCode == Activity.RESULT_OK)
         {
-            TaskResult taskResult = (TaskResult) data.getSerializableExtra(ViewTaskActivity.EXTRA_TASK_RESULT);
-            String result = (String) taskResult.getStepResult(ConsentTask.ID_SHARING).getResult();
-
-            Observable.fromCallable(() -> {
-                DataProvider.getInstance().setUserSharingScope(getContext(), result);
-                return null;
-            }).compose(ObservableUtils.applyDefault()).subscribe(o -> {
-                sharingScope.setSummary(formatSharingOption(result));
-            });
+//            TaskResult taskResult = (TaskResult) data.getSerializableExtra(ViewTaskActivity.EXTRA_TASK_RESULT);
+//            String result = (String) taskResult.getStepResult(ConsentTask.ID_SHARING).getResult();
+//
+//            Observable.fromCallable(() -> {
+//                DataProvider.getInstance().setUserSharingScope(getContext(), result);
+//                return null;
+//            }).compose(ObservableUtils.applyDefault()).subscribe(o -> {
+//                sharingScope.setSummary(formatSharingOption(result));
+//            });
         }
         else if(requestCode == REQUEST_CODE_CHANGE_PASSCODE && resultCode == Activity.RESULT_OK)
         {
