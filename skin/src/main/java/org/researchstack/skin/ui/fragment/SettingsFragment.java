@@ -198,18 +198,18 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                         }
                     });
 
-//            // Load Consent Data and set sharing scope
-//            Observable.defer(() -> Observable.just(ResourceManager.getInstance()
-//                    .getConsentSections()
-//                    .create(getActivity()))).flatMap((consentData) -> {
-//                this.data = (ConsentSectionModel) consentData;
-//
-//                // Load and set sharing scope
-//                return Observable.just(DataProvider.getInstance()
-//                        .getUserSharingScope(getContext()));
-//            }).compose(ObservableUtils.applyDefault()).subscribe(scope -> {
-//                sharingScope.setSummary(formatSharingOption(scope));
-//            });
+            // Load Consent Data and set sharing scope
+            Observable.defer(() -> Observable.just(ResourceManager.getInstance()
+                    .getConsentSections()
+                    .create(getActivity()))).flatMap((consentData) -> {
+                this.data = (ConsentSectionModel) consentData;
+
+                // Load and set sharing scope
+                return Observable.just(DataProvider.getInstance()
+                        .getUserSharingScope(getContext()));
+            }).compose(ObservableUtils.applyDefault()).subscribe(scope -> {
+                sharingScope.setSummary(formatSharingOption(scope));
+            });
         }
 
         isInitializedForConsent = true;
@@ -260,45 +260,45 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                     startActivityForResult(passcodeIntent, REQUEST_CODE_CHANGE_PASSCODE);
                     return true;
 
-//                case KEY_SHARING_OPTIONS:
-//                    String investigatorShortDesc = data.getDocumentProperties()
-//                            .getInvestigatorShortDescription();
-//
-//                    String investigatorLongDesc = data.getDocumentProperties()
-//                            .getInvestigatorLongDescription();
-//
-//                    String localizedLearnMoreHTMLContent = data.getDocumentProperties()
-//                            .getHtmlContent();
-//
-//                    ConsentSharingStep sharingStep = new ConsentSharingStep(ConsentTask.ID_SHARING);
-//                    sharingStep.setOptional(false);
-//                    sharingStep.setStepTitle(R.string.rss_settings_privacy_sharing_options);
-//
-//                    String shareWidely = getString(R.string.rsb_consent_share_widely,
-//                            investigatorLongDesc);
-//                    Choice<String> shareWidelyChoice = new Choice<>(shareWidely,
-//                            "sponsors_and_partners",
-//                            null);
-//
-//                    String shareRestricted = getString(R.string.rsb_consent_share_only,
-//                            investigatorShortDesc);
-//                    Choice<String> shareRestrictedChoice = new Choice<>(shareRestricted,
-//                            "all_qualified_researchers",
-//                            null);
-//
-//                    sharingStep.setAnswerFormat(new ChoiceAnswerFormat(AnswerFormat.ChoiceAnswerStyle.SingleChoice,
-//                            shareWidelyChoice,
-//                            shareRestrictedChoice));
-//
-//                    sharingStep.setTitle(getString(R.string.rsb_consent_share_title));
-//                    sharingStep.setText(getString(R.string.rsb_consent_share_description,
-//                            investigatorLongDesc,
-//                            localizedLearnMoreHTMLContent));
-//
-//                    Task task = new OrderedTask("SharingStepTask", sharingStep);
-//                    Intent intent = ViewTaskActivity.newIntent(getContext(), task);
-//                    startActivityForResult(intent, REQUEST_CODE_SHARING_OPTIONS);
-//                    return true;
+                case KEY_SHARING_OPTIONS:
+                    String investigatorShortDesc = data.getDocumentProperties()
+                            .getInvestigatorShortDescription();
+
+                    String investigatorLongDesc = data.getDocumentProperties()
+                            .getInvestigatorLongDescription();
+
+                    String localizedLearnMoreHTMLContent = data.getDocumentProperties()
+                            .getHtmlContent();
+
+                    ConsentSharingStep sharingStep = new ConsentSharingStep(ConsentTask.ID_SHARING);
+                    sharingStep.setOptional(false);
+                    sharingStep.setStepTitle(R.string.rss_settings_privacy_sharing_options);
+
+                    String shareWidely = getString(R.string.rsb_consent_share_widely,
+                            investigatorLongDesc);
+                    Choice<String> shareWidelyChoice = new Choice<>(shareWidely,
+                            "sponsors_and_partners",
+                            null);
+
+                    String shareRestricted = getString(R.string.rsb_consent_share_only,
+                            investigatorShortDesc);
+                    Choice<String> shareRestrictedChoice = new Choice<>(shareRestricted,
+                            "all_qualified_researchers",
+                            null);
+
+                    sharingStep.setAnswerFormat(new ChoiceAnswerFormat(AnswerFormat.ChoiceAnswerStyle.SingleChoice,
+                            shareWidelyChoice,
+                            shareRestrictedChoice));
+
+                    sharingStep.setTitle(getString(R.string.rsb_consent_share_title));
+                    sharingStep.setText(getString(R.string.rsb_consent_share_description,
+                            investigatorLongDesc,
+                            localizedLearnMoreHTMLContent));
+
+                    Task task = new OrderedTask("SharingStepTask", sharingStep);
+                    Intent intent = ViewTaskActivity.newIntent(getContext(), task);
+                    startActivityForResult(intent, REQUEST_CODE_SHARING_OPTIONS);
+                    return true;
 
                 case KEY_LEAVE_STUDY:
                     new AlertDialog.Builder(getActivity()).setTitle(R.string.rss_settings_general_leave_study)
@@ -362,15 +362,15 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     {
         if(requestCode == REQUEST_CODE_SHARING_OPTIONS && resultCode == Activity.RESULT_OK)
         {
-//            TaskResult taskResult = (TaskResult) data.getSerializableExtra(ViewTaskActivity.EXTRA_TASK_RESULT);
-//            String result = (String) taskResult.getStepResult(ConsentTask.ID_SHARING).getResult();
-//
-//            Observable.fromCallable(() -> {
-//                DataProvider.getInstance().setUserSharingScope(getContext(), result);
-//                return null;
-//            }).compose(ObservableUtils.applyDefault()).subscribe(o -> {
-//                sharingScope.setSummary(formatSharingOption(result));
-//            });
+            TaskResult taskResult = (TaskResult) data.getSerializableExtra(ViewTaskActivity.EXTRA_TASK_RESULT);
+            String result = (String) taskResult.getStepResult(ConsentTask.ID_SHARING).getResult();
+
+            Observable.fromCallable(() -> {
+                DataProvider.getInstance().setUserSharingScope(getContext(), result);
+                return null;
+            }).compose(ObservableUtils.applyDefault()).subscribe(o -> {
+                sharingScope.setSummary(formatSharingOption(result));
+            });
         }
         else if(requestCode == REQUEST_CODE_CHANGE_PASSCODE && resultCode == Activity.RESULT_OK)
         {

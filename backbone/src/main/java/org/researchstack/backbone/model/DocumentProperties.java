@@ -12,8 +12,8 @@ public class DocumentProperties
     @SerializedName("investigatorLongDescription")
     private String investigatorLongDescription;
 
-    @SerializedName("htmlContent")
-    private String htmlContent;
+//    @SerializedName("htmlContent")
+//    private String htmlContent;
 
     private boolean requiresSignature;
     private boolean requiresName;
@@ -49,15 +49,15 @@ public class DocumentProperties
         this.investigatorLongDescription = investigatorLongDescription;
     }
 
-    public String getHtmlContent()
-    {
-        return htmlContent;
-    }
+//    public String getHtmlContent()
+//    {
+//        return htmlContent;
+//    }
 
-    public void setHtmlContent(String htmlContent)
-    {
-        this.htmlContent = htmlContent;
-    }
+//    public void setHtmlContent(String htmlContent)
+//    {
+//        this.htmlContent = htmlContent;
+//    }
 
     public boolean requiresSignature()
     {
